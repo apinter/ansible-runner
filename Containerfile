@@ -5,9 +5,8 @@ COPY config/requirements.yml /requirements.yml
 
 RUN apk --update --no-cache upgrade
 RUN apk add py3-pip openssh-client git vim curl wget yq sshpass buildah && \
-    pip install ansible ansible-vault ara openshift yamllint requests
-RUN ansible-galaxy collection install -r requirements.yml && \ 
-    ansible-galaxy install newrelic.newrelic-infra
+    pip install ansible ansible-vault ara openshift yamllint requests --break-system-packages
+RUN ansible-galaxy collection install -r requirements.yml
 
 ENV ANSIBLE_CONFIG=/ansible.cfg
 ## Optional ARA configuration
